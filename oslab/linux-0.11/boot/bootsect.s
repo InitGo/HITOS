@@ -94,8 +94,9 @@ ok_load_setup:
 	mov	ah,#0x03		! read cursor pos
 	xor	bh,bh
 	int	0x10
-	
-	mov	cx,#24
+
+! cx存待打印的字符串长度 msg1
+	mov	cx,#90
 	mov	bx,#0x0007		! page 0, attribute 7 (normal)
 	mov	bp,#msg1
 	mov	ax,#0x1301		! write string, move cursor
@@ -241,9 +242,23 @@ kill_motor:
 sectors:
 	.word 0
 
+! 要打印的字符串msg1 size = 90
+！ .byte 13,10 是一对换行，回车
 msg1:
+
 	.byte 13,10
-	.ascii "Loading system ..."
+
+	.ascii "_|    _|  _|_|_|"
+	.byte 13,10
+	.ascii "_|    _|    _|"
+	.byte 13,10
+	.ascii "_|_|_|_|    _|"
+	.byte 13,10
+	.ascii "_|    _|    _|"
+	.byte 13,10
+	.ascii "_|    _|  _|_|_|"
+	.byte 13,10
+
 	.byte 13,10,13,10
 
 .org 508
